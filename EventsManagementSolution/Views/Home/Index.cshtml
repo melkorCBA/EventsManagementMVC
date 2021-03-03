@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EventsManagementSolution.Models.EventModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <h2>Events</h2>
+
+    @foreach (var item in Model)
+    {
+        <div class="card card-containe" style="width: 40rem; margin: 2rem;">
+            <div class="card-header">
+                @Html.DisplayFor(modelItem => item.Title)
+            </div>
+            <div class="list-group-item">
+                <div>
+                    Starting : @Html.DisplayFor(modelItem => item.StartDate)
+                </div>
+                <div>
+                    Ending :  @Html.DisplayFor(modelItem => item.EndDate)
+                </div>
+            </div>
+
+
+            <p class="list-group-item">
+                @Html.DisplayFor(modelItem => item.Description)
+            </p>
+
+            <div class="list-group-item">
+                <span>
+                    Duration :  @Html.DisplayFor(modelItem => item.Duration) | 
+                </span>
+
+                <span>
+                    Venue : @Html.DisplayFor(modelItem => item.Place) | 
+                </span>
+                <span>
+                    @{ 
+                        string isPublic = item.Visibility ?? false ? "No" : "Yes";
+                    }
+                    Public :  @Html.DisplayFor(modelItem => isPublic) 
+                </span>
+            </div>
+
+
+            <span class="list-group-item" style="@(Request.IsAuthenticated ? "display:block" : "display:none")">
+
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </span>
+        </div>
+    }
+
+
+</div>
+
+
+
+
