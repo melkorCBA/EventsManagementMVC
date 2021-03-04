@@ -36,7 +36,7 @@ namespace EventsManagementSolution.Controllers
                             // set a cookie for authenticated login
                             var readTask = result.Content.ReadAsAsync<LoginResponse>();
                             readTask.Wait();
-                            int userID = readTask.Result.LoggedInUserId;
+                            int userID = readTask.Result.LoginDTO.LoggedUserID;
                             FormsAuthentication.SetAuthCookie(userID.ToString(), false); // cookie distroies after user closes the bowser
                             Session["user"] = userID;
                             return RedirectToAction("Index", "home");
